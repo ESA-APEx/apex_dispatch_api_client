@@ -9,7 +9,9 @@ from apex_dispatch_api_client.api.default import health_health_get as health
 from apex_dispatch_api_client.api.unit_jobs import (
     create_unit_job_unit_jobs_post as create_unit_job,
 )
-from apex_dispatch_api_client.api.unit_jobs import get_job_unit_jobs_job_id_get as get_job
+from apex_dispatch_api_client.api.unit_jobs import (
+    get_job_unit_jobs_job_id_get as get_job,
+)
 from apex_dispatch_api_client.api.upscale_tasks import (
     get_jobs_status_jobs_status_get as get_jobs_status,
 )
@@ -66,7 +68,9 @@ def make_processing_job_summary_payload() -> dict[str, object]:
     }
 
 
-def make_auth_client(transport: httpx.MockTransport, **kwargs: object) -> AuthenticatedClient:
+def make_auth_client(
+    transport: httpx.MockTransport, **kwargs: object
+) -> AuthenticatedClient:
     return AuthenticatedClient(
         base_url=BASE_URL,
         token="test-token",
