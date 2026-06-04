@@ -1,0 +1,110 @@
+[build-system]
+requires = ["hatchling==1.29.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "apex-dispatch-api-client"
+dynamic = ["version"]
+description = "Python client for the APEx Dispatch API"
+
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+keywords = []
+authors = [
+  { name = "Fabrice Brito", email = "info@terradue.com" },
+  { name = "Simone Tripodi", email = "info@terradue.com"}
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "attrs>=22.2.0",
+  "httpx>=0.23.0,<1.0.0",
+  "urllib3>=1.25.3,<3.0.0",
+  "python-dateutil>=2.8.2",
+  "pydantic>=2",
+  "typing-extensions>=4.7.1",
+  "pystac>=1.13.0",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[project.urls]
+Documentation = "https://github.com/ESA-APEx/apex_dispatch_api_client#readme"
+Issues = "https://github.com/ESA-APEx/apex_dispatch_api_client/issues"
+Source = "https://github.com/ESA-APEx/apex_dispatch_api_client"
+
+[tool.hatch.version]
+path = "src/apex_dispatch_api_client/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy==1.19.1",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/apex_dispatch_api_client tests}"
+
+[tool.coverage.run]
+source_pkgs = ["apex_dispatch_api_client", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/apex_dispatch_api_client/__about__.py",
+]
+
+[tool.coverage.paths]
+apex_dispatch_api_client = ["src/apex_dispatch_api_client", "*/apex_dispatch_api_client/src/apex_dispatch_api_client"]
+tests = ["tests", "*/apex_dispatch_api_client/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
+
+[tool.hatch.envs.test]
+description = "Test environment"
+skip-install = false
+dependencies = ["pytest==9.0.2", "pytest-cov==7.0.0"]
+
+[tool.hatch.envs.test.scripts]
+test = "pytest"
+test-q = "pytest -q"
+test-cov = "pytest --cov=apex_dispatch_api_client"
+test-show-setup = "pytest --setup-show"
+
+[[tool.hatch.envs.test.matrix]]
+python = ["3.10", "3.11", "3.12", "3.13", "3.14"]
+
+[tool.hatch.envs.dev]
+description = "Development environment"
+dependencies = [
+  "pytest==9.0.2",
+  "ruff==0.15.6",
+]
+
+
+[tool.hatch.envs.dev.scripts]
+lint = "ruff format src tests"
+check = "ruff check --fix src tests"
+
+[tool.hatch.envs.docs]
+description = "Documentation environment"
+dependencies = [
+  "mkdocs>=1.6",
+]
+
+[tool.hatch.envs.docs.scripts]
+build = "mkdocs build --strict"
+serve = "mkdocs serve"

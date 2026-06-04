@@ -1,0 +1,48 @@
+# Copyright 2026 Terradue
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+version: '3'
+
+includes:
+  openapi: https://raw.githubusercontent.com/Terradue/taskfile-utils/refs/heads/main/openapi.yaml
+
+tasks:
+  default:
+    cmds:
+    - mkdir -p schemas
+    - wget https://dispatch-api.dev.apex.esa.int/openapi.json -O schemas/openapi.json
+    - mkdir -p src/apex_dispatch_api_client
+    - |
+      jq \
+      -r \
+      '"__version__ = \"" + .info.version + "\""' schemas/openapi.json \
+      > src/apex_dispatch_api_client/__about__.py
+    - task: openapi:generate_client
+      vars:
+        API: 'schemas/openapi.json'
+        OUTPUT: './src/apex_dispatch_api_client'
+
+  serve_docs:
+    desc: Serve the MkDocs site locally
+    preconditions:
+    - sh: command -v uv >/dev/null 2>&1
+      msg: "Missing uv, see https://docs.astral.sh/uv/"
+    cmds:
+      - |
+        uv run \
+        --no-project \
+        --with mkdocs \
+        --with mkdocs-material \
+        --with mkdocs-mermaid2-plugin \
+        mkdocs serve

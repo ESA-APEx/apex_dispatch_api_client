@@ -1,0 +1,60 @@
+# Copyright 2026 Terradue
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+site_name: APEx Dispatch API Client
+site_description: Python client for the APEx Dispatch API
+site_url: https://esa-apex.github.io/apex_dispatch_api_client/
+repo_url: https://github.com/ESA-APEx/apex_dispatch_api_client
+repo_name: ESA-APEx/apex_dispatch_api_client
+edit_uri: edit/main/docs/
+
+theme:
+  logo: imgs/icon-eoap.png
+  name: material
+
+  palette:
+  - media: "(prefers-color-scheme: light)"
+    scheme: default
+    toggle:
+      icon: material/toggle-switch-off-outline
+      name: Switch to dark mode
+  - media: "(prefers-color-scheme: dark)"
+    scheme: slate
+    toggle:
+      icon: material/toggle-switch
+      name: Switch to light mode
+
+nav:
+  - Home: index.md
+  - Tutorials:
+      - Submit your first processing job: tutorials/first-processing-job.md
+  - How-to guides:
+      - Configure clients: how-to/configure-clients.md
+      - Submit processing jobs: how-to/submit-processing-jobs.md
+      - Inspect jobs and results: how-to/inspect-jobs-and-results.md
+      - Use async calls: how-to/use-async.md
+      - Handle errors: how-to/handle-errors.md
+  - Reference:
+      - Clients: reference/clients.md
+      - Operations: reference/operations.md
+      - Models: reference/models.md
+  - Explanation:
+      - Generated client architecture: explanation/generated-client.md
+      - Data models and extra fields: explanation/data-models.md
+
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
