@@ -28,7 +28,7 @@ classifiers = [
 ]
 dependencies = [
   "attrs>=22.2.0",
-  "httpx>=0.23.0,<1.0.0",
+  "httpx>=0.28.1,<1.0.0",
   "urllib3>=1.25.3,<3.0.0",
   "python-dateutil>=2.8.2",
   "pydantic>=2",
