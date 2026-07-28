@@ -33,7 +33,7 @@ dependencies = [
   "python-dateutil>=2.8.2",
   "pydantic>=2",
   "typing-extensions>=4.7.1",
-  "pystac>=1.13.0",
+  "pystac>=1.15.2",
 ]
 
 [tool.hatch.metadata]
